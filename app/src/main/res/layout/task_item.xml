@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -55,15 +56,24 @@
                 android:id="@+id/del"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:backgroundTint="#CA4F4F"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Delete"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:text="Edit" />
+                android:backgroundTint="@color/btn"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Edit"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -7,7 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -15,10 +16,20 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         fun onTaskDeleteClick(task: Task)
     }
 
+    interface OnTaskEditClickListener {
+        fun onTaskEditClick(task: Task)
+    }
+
     private var onTaskDeleteClickListener: OnTaskDeleteClickListener? = null
 
     fun setOnTaskDeleteClickListener(listener: OnTaskDeleteClickListener) {
         onTaskDeleteClickListener = listener
+    }
+
+    private var onTaskEditClickListener: OnTaskEditClickListener? = null
+
+    fun setOnTaskEditClickListener(listener: OnTaskEditClickListener) {
+        onTaskEditClickListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -53,6 +64,7 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         private val priorityTextView: TextView = itemView.findViewById(R.id.priorityTextView)
         private val deadlineTextView: TextView = itemView.findViewById(R.id.deadlineTextView)
         private val deleteButton: Button = itemView.findViewById(R.id.del)
+        private val editButton: Button = itemView.findViewById(R.id.edit)
 
         init {
             deleteButton.setOnClickListener {
@@ -60,6 +72,14 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
                 if (position != RecyclerView.NO_POSITION) {
                     val task = tasks[position]
                     onTaskDeleteClickListener?.onTaskDeleteClick(task)
+                }
+            }
+
+            editButton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val task = tasks[position]
+                    onTaskEditClickListener?.onTaskEditClick(task)
                 }
             }
         }

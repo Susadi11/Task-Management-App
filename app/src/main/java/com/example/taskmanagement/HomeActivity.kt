@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.PopupMenu
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
 
     private lateinit var taskDao: TaskDao
     private lateinit var recyclerView: RecyclerView
@@ -60,6 +59,8 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
+        taskAdapter.setOnTaskEditClickListener(this)
+
         loadTasks()
 
         // Register the RecyclerView for the context menu
@@ -70,6 +71,12 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onTaskEditClick(task: Task) {
+        val intent = Intent(this, EditTaskActivity::class.java)
+        intent.putExtra("taskId", task.id)
+        startActivity(intent)
     }
 
     override fun onCreateContextMenu(

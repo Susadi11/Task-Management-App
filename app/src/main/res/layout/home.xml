@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".HomeActivity">
 
     <RelativeLayout
@@ -38,18 +39,19 @@
         android:id="@+id/taskRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
+        android:layout_above="@+id/fab"
         android:layout_below="@id/sortBySpinner"
-        android:layout_above="@id/fab"
+        android:layout_marginTop="20dp"
         android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="25dp"
         android:backgroundTint="@color/btn"
         android:src="@drawable/baseline_add_24" />
 

@@ -30,6 +30,10 @@
             android:name=".AddTaskActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".EditTaskActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
