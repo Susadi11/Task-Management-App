@@ -15,7 +15,7 @@ interface TaskDao {
     fun updateTask(task: Task)
 
     @Delete
-    fun delete(user: Task): Int
+    fun delete(task: Task): Int
 
     @Query("SELECT * FROM task_table")
     fun getAll(): List<Task> // Define getAll() function to retrieve all tasks

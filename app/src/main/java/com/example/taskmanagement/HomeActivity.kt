@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity() {
 
@@ -54,11 +54,16 @@ class HomeActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter(emptyList())
         recyclerView.adapter = taskAdapter
 
+        taskAdapter.setOnTaskDeleteClickListener(object : TaskAdapter.OnTaskDeleteClickListener {
+            override fun onTaskDeleteClick(task: Task) {
+                deleteTask(task)
+            }
+        })
+
         loadTasks()
 
         // Register the RecyclerView for the context menu
         registerForContextMenu(recyclerView)
-
 
         val addTaskButton = findViewById<FloatingActionButton>(R.id.fab)
         addTaskButton.setOnClickListener {
@@ -87,7 +92,6 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.action_delete -> {
                 // Handle delete action
-                // You can access the task object and delete it from the database
                 deleteTask(task)
                 true
             }
@@ -95,35 +99,13 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun showPopupMenu(view: View) {
-        val popupMenu = PopupMenu(this, view)
-        popupMenu.inflate(R.menu.task_context_menu) // Your menu XML file
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_edit -> {
-                    // Handle edit action
-                    true
-                }
-                R.id.action_delete -> {
-                    // Handle delete action
-                    // You can access the task object and delete it from the database
-                    val position = recyclerView.getChildAdapterPosition(view)
-                    val task = taskAdapter.getItem(position)
-                    if (task != null) {
-                        deleteTask(task)
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-
     private fun deleteTask(task: Task) {
         lifecycleScope.launch(Dispatchers.IO) {
             taskDao.delete(task)
-            loadTasks()
+            val updatedTasks = taskDao.getAll()
+            withContext(Dispatchers.Main) {
+                taskAdapter.updateTasks(updatedTasks)
+            }
         }
     }
 
