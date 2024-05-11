@@ -11,8 +11,8 @@
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
         android:hint="@string/task_title"
-        android:fontFamily="@font/poppins_bold"
         android:padding="12dp"
         android:textSize="16sp" />
 
@@ -21,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleEditText"
-        android:hint="@string/task_description"
         android:fontFamily="@font/poppins_semibold"
+        android:hint="@string/task_description"
         android:padding="12dp"
         android:textSize="16sp" />
 
@@ -93,12 +93,13 @@
             android:id="@+id/showDatePickerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showDatePicker"
-            android:text="@string/date_picker_text"
+            android:backgroundTint="@color/btn"
             android:fontFamily="@font/poppins_bold"
-            android:textSize="16sp"
+            android:onClick="showDatePicker"
+            android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            android:paddingHorizontal="16dp" />
+            android:text="@string/date_picker_text"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/selectedDateTextView"
@@ -120,11 +121,12 @@
         android:layout_below="@id/deadlineLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="@string/save_task"
-        android:onClick="saveTask"
+        android:backgroundTint="@color/btn"
         android:fontFamily="@font/poppins_bold"
-        android:textSize="16sp"
+        android:onClick="saveTask"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="12dp"
-        android:paddingHorizontal="24dp" />
+        android:text="@string/save_task"
+        android:textSize="16sp" />
 
 </RelativeLayout>

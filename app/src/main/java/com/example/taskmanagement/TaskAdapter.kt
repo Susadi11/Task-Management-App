@@ -30,6 +30,13 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         notifyDataSetChanged()
     }
 
+    fun getItem(position: Int): Task? {
+        if (position in 0 until tasks.size) {
+            return tasks[position]
+        }
+        return null
+    }
+
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)

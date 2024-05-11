@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="@color/bg"
+    android:backgroundTint="@color/bg"
     app:cardCornerRadius="15dp">
 
     <LinearLayout
@@ -40,9 +42,9 @@
             android:id="@+id/deadlineTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -50,12 +52,14 @@
         android:id="@+id/optionsImageView"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/ic_three_dot"
         android:layout_gravity="top|end"
         android:layout_margin="8dp"
-        android:padding="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:padding="8dp"
+        android:src="@drawable/ic_three_dot"
+        android:onClick="showPopupMenu" />
+
 
 </androidx.cardview.widget.CardView>
