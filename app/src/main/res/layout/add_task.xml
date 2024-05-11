@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AddTaskActivity">
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/task_title"
+        android:fontFamily="@font/poppins_bold"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/descriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleEditText"
+        android:hint="@string/task_description"
+        android:fontFamily="@font/poppins_semibold"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <!-- Priority Label -->
+    <TextView
+        android:id="@+id/priorityLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_marginTop="16dp"
+        android:text="@string/priority"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/priorityInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priorityLabelTextView"
+        android:layout_marginTop="8dp">
+
+        <RadioGroup
+            android:id="@+id/priorityRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/lowPriorityRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/low_priority"
+                android:textSize="16sp"
+                android:buttonTint="@color/btn" />
+
+            <RadioButton
+                android:id="@+id/mediumPriorityRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#FF9800"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/medium_priority"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/highPriorityRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#D51414"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/high_priority"
+                android:textSize="16sp" />
+
+        </RadioGroup>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/deadlineLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priorityInputLayout"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/showDatePickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="showDatePicker"
+            android:text="@string/date_picker_text"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp" />
+
+        <TextView
+            android:id="@+id/selectedDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text=""
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deadlineLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/save_task"
+        android:onClick="saveTask"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="24dp" />
+
+</RelativeLayout>

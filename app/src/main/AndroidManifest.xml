@@ -27,7 +27,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".ToDoActivity"
+            android:name=".AddTaskActivity"
             android:exported="true" />
 
         <meta-data
