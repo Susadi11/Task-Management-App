@@ -26,4 +26,16 @@ interface TaskDao {
     @Query("SELECT * FROM task_table WHERE title LIKE '%' || :searchText || '%' OR description LIKE '%' || :searchText || '%'")
     fun searchTasks(searchText: String): List<Task>
 
+    @Query("SELECT * FROM task_table ORDER BY title ASC")
+    fun getAllSortedByTitleAsc(): List<Task>
+
+    @Query("SELECT * FROM task_table ORDER BY title DESC")
+    fun getAllSortedByTitleDesc(): List<Task>
+
+    @Query("SELECT * FROM task_table ORDER BY priority DESC")
+    fun getAllSortedByPriorityAsc(): List<Task>
+
+    @Query("SELECT * FROM task_table ORDER BY priority ASC")
+    fun getAllSortedByPriorityDesc(): List<Task>
+
 }

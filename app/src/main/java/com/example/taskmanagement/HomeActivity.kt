@@ -134,8 +134,18 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     }
 
     private fun sortTasks(selectedOption: String) {
-        // Implement sorting logic based on the selected option
-        // For example, you can update the RecyclerView adapter with sorted data
+        lifecycleScope.launch(Dispatchers.IO) {
+            val tasks = when (selectedOption) {
+                "Title A-Z" -> taskDao.getAllSortedByTitleAsc()
+                "Title Z-A" -> taskDao.getAllSortedByTitleDesc()
+                "Priority Low-High" -> taskDao.getAllSortedByPriorityAsc()
+                "Priority High-Low" -> taskDao.getAllSortedByPriorityDesc()
+                else -> taskDao.getAll() // Default to unsorted list
+            }
+            withContext(Dispatchers.Main) {
+                taskAdapter.updateTasks(tasks)
+            }
+        }
     }
 
     private fun filterTasks(searchText: String) {
