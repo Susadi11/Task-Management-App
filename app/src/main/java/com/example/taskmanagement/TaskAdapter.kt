@@ -3,7 +3,7 @@ package com.example.taskmanagement
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -63,11 +63,11 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         private val priorityTextView: TextView = itemView.findViewById(R.id.priorityTextView)
         private val deadlineTextView: TextView = itemView.findViewById(R.id.deadlineTextView)
-        private val deleteButton: Button = itemView.findViewById(R.id.del)
-        private val editButton: Button = itemView.findViewById(R.id.edit)
-
+        private val imageDelButton: ImageButton = itemView.findViewById(R.id.imageDelButton) // Locate the ImageButton
+        private val imageEditButton: ImageButton = itemView.findViewById(R.id.imageEditButton) // Locate the ImageButton
         init {
-            deleteButton.setOnClickListener {
+
+            imageDelButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val task = tasks[position]
@@ -75,7 +75,7 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
                 }
             }
 
-            editButton.setOnClickListener {
+            imageEditButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val task = tasks[position]

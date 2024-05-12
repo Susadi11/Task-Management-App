@@ -11,6 +11,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageEditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/bg"
+            app:srcCompat="@drawable/baseline_edit_24" />
+
+        <ImageButton
+            android:id="@+id/imageDelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/bg"
+            app:srcCompat="@drawable/baseline_delete_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -46,35 +68,6 @@
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/black"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/del"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
-                android:backgroundTint="#CA4F4F"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Delete"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/btn"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Edit"
-                android:textSize="16sp" />
-        </LinearLayout>
 
     </LinearLayout>
 
