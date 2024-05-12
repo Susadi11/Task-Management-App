@@ -24,7 +24,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="169dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Taskly"
+        android:text="@string/splash"
         android:textColor="#FFFFFF"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"

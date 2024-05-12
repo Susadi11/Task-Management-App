@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     private lateinit var searchEditText: EditText
     private lateinit var searchIcon: ImageView
     private val sortOptions = arrayOf("Title A-Z", "Title Z-A", "Priority Low-High", "Priority High-Low")
+    private lateinit var undoDeleteHandler: UndoDeleteHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,8 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
 
         // Initialize the ViewModel
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        undoDeleteHandler = UndoDeleteHandler(this)
 
         sortBySpinner = findViewById(R.id.sortBySpinner)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sortOptions)
@@ -104,6 +107,11 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
 
     private fun deleteTask(task: Task) {
         viewModel.deleteTask(task)
+        undoDeleteHandler.showUndoSnackbar(task)
+    }
+
+    fun undoDelete(task: Task) {
+        viewModel.insertTask(task)
     }
 
     override fun onResume() {

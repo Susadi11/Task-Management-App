@@ -18,10 +18,9 @@
             android:layout_width="52dp"
             android:layout_height="47dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="13dp"
-            android:src="@drawable/ic_search"
-            android:onClick="toggleSearchBar"/>
+            android:layout_marginEnd="53dp"
+            android:onClick="toggleSearchBar"
+            android:src="@drawable/ic_search" />
 
         <EditText
             android:id="@+id/searchEditText"
@@ -35,7 +34,7 @@
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/crossIcon"
@@ -44,9 +43,9 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="13dp"
+            android:onClick="toggleSearchBar"
             android:src="@drawable/ic_close"
-            android:visibility="gone"
-            android:onClick="toggleSearchBar"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/titleTextView"
@@ -77,6 +76,7 @@
         android:layout_above="@+id/fab"
         android:layout_below="@id/sortBySpinner"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp"
         android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -89,6 +89,12 @@
         android:layout_marginBottom="25dp"
         android:backgroundTint="@color/btn"
         android:src="@drawable/baseline_add_24" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch" />
 
 
 </RelativeLayout>
