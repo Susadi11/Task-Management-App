@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.ContextMenu
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -59,12 +57,6 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
         taskAdapter = TaskAdapter(emptyList())
         recyclerView.adapter = taskAdapter
 
-        taskAdapter.setOnTaskDeleteClickListener(object : TaskAdapter.OnTaskDeleteClickListener {
-            override fun onTaskDeleteClick(task: Task) {
-                deleteTask(task)
-            }
-        })
-
         taskAdapter.setOnTaskEditClickListener(this)
 
         loadTasks()
@@ -112,33 +104,6 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
         startActivity(intent)
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?,
-        v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.task_context_menu, menu)
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val position = (item.menuInfo as? AdapterView.AdapterContextMenuInfo)?.position
-        val task = taskAdapter.getItem(position ?: -1) ?: return super.onContextItemSelected(item)
-
-        return when (item.itemId) {
-            R.id.action_edit -> {
-                // Handle edit action
-                true
-            }
-            R.id.action_delete -> {
-                // Handle delete action
-                deleteTask(task)
-                true
-            }
-            else -> super.onContextItemSelected(item)
-        }
-    }
-
     private fun deleteTask(task: Task) {
         lifecycleScope.launch(Dispatchers.IO) {
             taskDao.delete(task)
@@ -152,6 +117,11 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     override fun onResume() {
         super.onResume()
         loadTasks()
+        taskAdapter.setOnTaskDeleteClickListener(object : TaskAdapter.OnTaskDeleteClickListener {
+            override fun onTaskDeleteConfirmed(task: Task) {
+                deleteTask(task)
+            }
+        })
     }
 
     private fun loadTasks() {

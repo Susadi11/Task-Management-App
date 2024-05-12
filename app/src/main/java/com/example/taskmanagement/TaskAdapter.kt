@@ -1,5 +1,6 @@
 package com.example.taskmanagement
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import java.util.Locale
 class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     interface OnTaskDeleteClickListener {
-        fun onTaskDeleteClick(task: Task)
+        fun onTaskDeleteConfirmed(task: Task)
     }
 
     interface OnTaskEditClickListener {
@@ -63,15 +64,15 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         private val priorityTextView: TextView = itemView.findViewById(R.id.priorityTextView)
         private val deadlineTextView: TextView = itemView.findViewById(R.id.deadlineTextView)
-        private val imageDelButton: ImageButton = itemView.findViewById(R.id.imageDelButton) // Locate the ImageButton
-        private val imageEditButton: ImageButton = itemView.findViewById(R.id.imageEditButton) // Locate the ImageButton
-        init {
+        private val imageDelButton: ImageButton = itemView.findViewById(R.id.imageDelButton)
+        private val imageEditButton: ImageButton = itemView.findViewById(R.id.imageEditButton)
 
+        init {
             imageDelButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val task = tasks[position]
-                    onTaskDeleteClickListener?.onTaskDeleteClick(task)
+                    showDeleteConfirmationDialog(task)
                 }
             }
 
@@ -87,9 +88,20 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         fun bind(task: Task) {
             titleTextView.text = task.title
             descriptionTextView.text = task.description
-            priorityTextView.text = "Priority: ${task.priority.name}" // Displaying priority name
+            priorityTextView.text = "Priority: ${task.priority.name}"
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             deadlineTextView.text = "Deadline: ${dateFormat.format(Date(task.deadline))}"
+        }
+
+        private fun showDeleteConfirmationDialog(task: Task) {
+            val builder = AlertDialog.Builder(itemView.context)
+            builder.setTitle("Confirm Deletion")
+                .setMessage("Are you sure you want to delete this task?")
+                .setPositiveButton("YES") { _, _ ->
+                    onTaskDeleteClickListener?.onTaskDeleteConfirmed(task)
+                }
+                .setNegativeButton("NO", null)
+                .show()
         }
     }
 }
