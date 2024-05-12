@@ -12,4 +12,9 @@
     <string name="delete">Delete</string>
     <string name="edit_task">Edit</string>
     <string name="splash">Taskly</string>
+    <string name="Settings">Settings</string>
+    <string name="dark">Dark mode</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="About_Us">About Us</string>
+    <string name="Feedback">Feedback</string>
 </resources>

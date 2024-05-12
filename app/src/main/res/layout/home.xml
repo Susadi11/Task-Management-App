@@ -18,7 +18,7 @@
             android:layout_width="52dp"
             android:layout_height="47dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="53dp"
+            android:layout_marginEnd="10dp"
             android:onClick="toggleSearchBar"
             android:src="@drawable/ic_search" />
 
@@ -78,6 +78,17 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="0dp"
         android:padding="16dp" />
+
+
+    <ImageButton
+        android:id="@+id/imageSettingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fab"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="700dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/baseline_settings_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

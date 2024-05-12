@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,15 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
+
+        val imageDelButton = findViewById<ImageButton>(R.id.imageSettingButton)
+
+        // Set OnClickListener for the imageDelButton
+        imageDelButton.setOnClickListener {
+            // Navigate to SettingActivity when imageDelButton is clicked
+            val intent = Intent(this@HomeActivity, SettingActivity::class.java)
+            startActivity(intent)
+        }
 
         // Initialize the ViewModel
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
