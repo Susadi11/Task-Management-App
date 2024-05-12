@@ -17,4 +17,5 @@
     <string name="dark_mode">Dark mode</string>
     <string name="About_Us">About Us</string>
     <string name="Feedback">Feedback</string>
+    <string name="night_mode_key">night_mode</string>
 </resources>

@@ -22,6 +22,8 @@
             android:onClick="toggleSearchBar"
             android:src="@drawable/ic_search" />
 
+
+
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="300dp"

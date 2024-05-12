@@ -40,7 +40,7 @@
             android:fontFamily="@font/poppins_semibold" />
 
         <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/soundSwitch"
+            android:id="@+id/nightSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:trackTint="@drawable/colour_selector"
