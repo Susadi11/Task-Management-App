@@ -1,5 +1,6 @@
 package com.example.taskmanagement
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -18,24 +19,26 @@ interface TaskDao {
     fun delete(task: Task): Int
 
     @Query("SELECT * FROM task_table")
-    fun getAll(): List<Task> // Define getAll() function to retrieve all tasks
+    fun getAll(): List<Task>
+
+    @Query("SELECT * FROM task_table")
+    fun getAllTasksLiveData(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table WHERE id = :taskId")
     fun getTaskById(taskId: Long): Task
 
     @Query("SELECT * FROM task_table WHERE title LIKE '%' || :searchText || '%' OR description LIKE '%' || :searchText || '%'")
-    fun searchTasks(searchText: String): List<Task>
+    fun searchTasks(searchText: String): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY title ASC")
-    fun getAllSortedByTitleAsc(): List<Task>
+    fun getAllSortedByTitleAsc(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY title DESC")
-    fun getAllSortedByTitleDesc(): List<Task>
+    fun getAllSortedByTitleDesc(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY priority DESC")
-    fun getAllSortedByPriorityAsc(): List<Task>
+    fun getAllSortedByPriorityAsc(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY priority ASC")
-    fun getAllSortedByPriorityDesc(): List<Task>
-
+    fun getAllSortedByPriorityDesc(): LiveData<List<Task>>
 }

@@ -11,17 +11,15 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
 
-    private lateinit var taskDao: TaskDao
+    private lateinit var viewModel: HomeViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var sortBySpinner: Spinner
@@ -32,6 +30,9 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
+
+        // Initialize the ViewModel
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         sortBySpinner = findViewById(R.id.sortBySpinner)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sortOptions)
@@ -48,9 +49,6 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
                 // Handle nothing selected
             }
         }
-
-        val taskDatabase = TaskDatabase.getDatabase(applicationContext)
-        taskDao = taskDatabase.taskDao()
 
         recyclerView = findViewById(R.id.taskRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -105,13 +103,7 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     }
 
     private fun deleteTask(task: Task) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            taskDao.delete(task)
-            val updatedTasks = taskDao.getAll()
-            withContext(Dispatchers.Main) {
-                taskAdapter.updateTasks(updatedTasks)
-            }
-        }
+        viewModel.deleteTask(task)
     }
 
     override fun onResume() {
@@ -125,39 +117,31 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
     }
 
     private fun loadTasks() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val tasks = taskDao.getAll()
-            withContext(Dispatchers.Main) {
-                taskAdapter.updateTasks(tasks)
-            }
-        }
+        viewModel.getAllTasks().observe(this, Observer { tasks ->
+            taskAdapter.updateTasks(tasks)
+        })
     }
 
     private fun sortTasks(selectedOption: String) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val tasks = when (selectedOption) {
-                "Title A-Z" -> taskDao.getAllSortedByTitleAsc()
-                "Title Z-A" -> taskDao.getAllSortedByTitleDesc()
-                "Priority Low-High" -> taskDao.getAllSortedByPriorityAsc()
-                "Priority High-Low" -> taskDao.getAllSortedByPriorityDesc()
-                else -> taskDao.getAll() // Default to unsorted list
-            }
-            withContext(Dispatchers.Main) {
+        when (selectedOption) {
+            "Title A-Z" -> viewModel.getAllSortedByTitleAsc().observe(this, Observer { tasks ->
                 taskAdapter.updateTasks(tasks)
-            }
+            })
+            "Title Z-A" -> viewModel.getAllSortedByTitleDesc().observe(this, Observer { tasks ->
+                taskAdapter.updateTasks(tasks)
+            })
+            "Priority Low-High" -> viewModel.getAllSortedByPriorityAsc().observe(this, Observer { tasks ->
+                taskAdapter.updateTasks(tasks)
+            })
+            "Priority High-Low" -> viewModel.getAllSortedByPriorityDesc().observe(this, Observer { tasks ->
+                taskAdapter.updateTasks(tasks)
+            })
         }
     }
 
     private fun filterTasks(searchText: String) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val filteredTasks = if (searchText.isNotEmpty()) {
-                taskDao.searchTasks("%$searchText%") // Assuming you have implemented searchTasks in TaskDao
-            } else {
-                taskDao.getAll()
-            }
-            withContext(Dispatchers.Main) {
-                taskAdapter.updateTasks(filteredTasks)
-            }
-        }
+        viewModel.searchTasks(searchText).observe(this, Observer { tasks ->
+            taskAdapter.updateTasks(tasks)
+        })
     }
 }
