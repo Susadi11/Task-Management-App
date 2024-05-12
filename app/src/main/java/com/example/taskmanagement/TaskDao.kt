@@ -22,4 +22,8 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_table WHERE id = :taskId")
     fun getTaskById(taskId: Long): Task
+
+    @Query("SELECT * FROM task_table WHERE title LIKE '%' || :searchText || '%' OR description LIKE '%' || :searchText || '%'")
+    fun searchTasks(searchText: String): List<Task>
+
 }
