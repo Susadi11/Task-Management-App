@@ -41,4 +41,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_table ORDER BY priority ASC")
     fun getAllSortedByPriorityDesc(): LiveData<List<Task>>
+
+    @Query("SELECT * FROM task_table WHERE date(deadline / 1000, 'unixepoch', 'localtime') = date('now', 'localtime')")
+    fun getTasksWithDeadlineToday(): List<Task>
 }

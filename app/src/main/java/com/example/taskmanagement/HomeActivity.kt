@@ -42,6 +42,8 @@ class HomeActivity : AppCompatActivity(), TaskAdapter.OnTaskEditClickListener {
             startActivity(intent)
         }
 
+        startService(Intent(this, TaskReminderService::class.java))
+
         // Initialize the ViewModel
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 

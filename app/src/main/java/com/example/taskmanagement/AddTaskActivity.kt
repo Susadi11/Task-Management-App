@@ -49,12 +49,25 @@ class AddTaskActivity : AppCompatActivity() {
     fun saveTask(view: View) {
         val title = findViewById<EditText>(R.id.titleEditText).text.toString().trim()
         val description = findViewById<EditText>(R.id.descriptionEditText).text.toString().trim()
-        val deadline = System.currentTimeMillis()
+
+        // Check if a date is selected
+        if (selectedDateTextView.text.isNullOrEmpty()) {
+            Toast.makeText(this, "Please select a deadline", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val deadline = selectedDateTextView.text.toString()
+
+        // Parse the selected date into milliseconds
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = sdf.parse(deadline)
+        val deadlineMillis = date?.time ?: System.currentTimeMillis()
 
         // Ensure selectedPriority is assigned as a Priority enum
-        val task = Task(title = title, description = description, priority = selectedPriority, deadline = deadline)
+        val task = Task(title = title, description = description, priority = selectedPriority, deadline = deadlineMillis)
         insertTask(task)
     }
+
 
 
     private fun insertTask(task: Task) {
