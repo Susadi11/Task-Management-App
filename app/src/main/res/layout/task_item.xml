@@ -42,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/tittle"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
+            android:textColor="@color/content"
             android:textSize="14sp" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
+            android:textColor="@color/content"
             android:textSize="14sp" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/black"
+            android:textColor="@color/content"
             android:textSize="14sp" />
 
     </LinearLayout>

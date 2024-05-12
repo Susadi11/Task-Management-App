@@ -25,7 +25,7 @@ class TaskReminderService : IntentService("TaskReminderService") {
 
         tasks.forEach { task ->
             val builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.ic_three_dot)
+                .setSmallIcon(R.drawable.baseline_notifications_24)
                 .setContentTitle("Task Reminder")
                 .setContentText("${task.title} is due today!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

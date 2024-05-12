@@ -13,14 +13,17 @@
         android:background="@color/btn"
         android:elevation="4dp">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/searchIcon"
-            android:layout_width="52dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/btn"
             android:onClick="toggleSearchBar"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/baseline_search_24" />
 
 
 

@@ -6,4 +6,6 @@
     <color name="btn">#4CAF50</color>
     <color name="colorAccent">#4AC118</color>
     <color name="grey">#626361</color>
+    <color name="tittle">#063708</color>
+    <color name="content">#1B1B1B</color>
 </resources>
