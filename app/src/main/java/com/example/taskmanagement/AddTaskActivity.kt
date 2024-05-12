@@ -22,7 +22,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var taskDao: TaskDao
     private lateinit var selectedDateTextView: TextView
-    private lateinit var selectedPriority: String
+    private lateinit var selectedPriority: Priority
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,12 @@ class AddTaskActivity : AppCompatActivity() {
         val priorityRadioGroup = findViewById<RadioGroup>(R.id.priorityRadioGroup)
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radioButton = findViewById<RadioButton>(checkedId)
-            selectedPriority = radioButton.text.toString()
+            selectedPriority = when (radioButton.id) {
+                R.id.lowPriorityRadioButton -> Priority.LOW
+                R.id.mediumPriorityRadioButton -> Priority.MEDIUM
+                R.id.highPriorityRadioButton -> Priority.HIGH
+                else -> Priority.LOW // Default to low priority if none selected
+            }
             Log.d("AddTaskActivity", "Selected Priority: $selectedPriority")
         }
     }
@@ -46,9 +51,11 @@ class AddTaskActivity : AppCompatActivity() {
         val description = findViewById<EditText>(R.id.descriptionEditText).text.toString().trim()
         val deadline = System.currentTimeMillis()
 
+        // Ensure selectedPriority is assigned as a Priority enum
         val task = Task(title = title, description = description, priority = selectedPriority, deadline = deadline)
         insertTask(task)
     }
+
 
     private fun insertTask(task: Task) {
         lifecycleScope.launch(Dispatchers.IO) {

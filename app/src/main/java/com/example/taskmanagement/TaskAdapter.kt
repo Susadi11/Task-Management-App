@@ -87,7 +87,7 @@ class TaskAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         fun bind(task: Task) {
             titleTextView.text = task.title
             descriptionTextView.text = task.description
-            priorityTextView.text = "Priority: ${task.priority}"
+            priorityTextView.text = "Priority: ${task.priority.name}" // Displaying priority name
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             deadlineTextView.text = "Deadline: ${dateFormat.format(Date(task.deadline))}"
         }

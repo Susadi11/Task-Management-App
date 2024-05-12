@@ -123,10 +123,10 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/btn"
         android:fontFamily="@font/poppins_bold"
-        android:onClick="saveTask"
+        android:onClick="saveEditedTask"
         android:paddingHorizontal="24dp"
         android:paddingVertical="12dp"
-        android:text="@string/save_task"
+        android:text="@string/edit_task"
         android:textSize="16sp" />
 
 </RelativeLayout>

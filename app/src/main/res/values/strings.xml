@@ -10,4 +10,5 @@
     <string name="save_task">Save</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="edit_task">Edit</string>
 </resources>
